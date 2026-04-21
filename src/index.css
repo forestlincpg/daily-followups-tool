@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── 系统字体栈 CSS 变量 ──────────────────────────────────── */
+:root {
+  --font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+}
+
+/* ── 基础 body 样式 ───────────────────────────────────────── */
+body {
+  font-family: var(--font-system);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1e293b;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── 焦点指示器：全局禁用 outline，用背景色高亮代替 ───────── */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: none;
+}

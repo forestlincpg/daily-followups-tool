@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!--
+    Daily Follow-ups Tool Icon
+    Fluent 2-style composition:
+      BACK  : L-shaped sticky note  →  represents "L" + follow-up list
+      FRONT : deep-blue square "C"  →  Microsoft-style letter block (left)
+    Transparent background, P&G Blue palette
+  -->
+  <defs>
+    <!-- Note body: brighter-to-deeper P&G blue -->
+    <linearGradient id="noteGrad" x1="5%" y1="0%" x2="95%" y2="100%">
+      <stop offset="0%"   stop-color="#2780E8"/>
+      <stop offset="100%" stop-color="#0546B0"/>
+    </linearGradient>
+    <!-- Fold corner: darker shade -->
+    <linearGradient id="foldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#1156BE"/>
+      <stop offset="100%" stop-color="#003898"/>
+    </linearGradient>
+    <!-- C-block: deep P&G blue -->
+    <linearGradient id="blockGrad" x1="5%" y1="0%" x2="95%" y2="100%">
+      <stop offset="0%"   stop-color="#1055C4"/>
+      <stop offset="100%" stop-color="#003DA5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ═══════════════════════════════════
+       LAYER 1 — L-shaped sticky note
+       Vertical bar (top) + Horizontal foot (bottom-right)
+       This L-shape = letter "L" + document metaphor
+       ═══════════════════════════════════ -->
+  <!--
+    Corner points (clockwise):
+    top-left      (155, 52)
+    pre-fold      (304, 52)   ← fold cut starts here
+    after-fold    (340, 88)
+    inner-corner  (340, 368)  ← L elbow
+    foot-right    (470, 368)
+    bottom-right  (470, 455)
+    bottom-left   (155, 455)
+  -->
+  <polygon
+    points="155,52 304,52 340,88 340,368 470,368 470,455 155,455"
+    fill="url(#noteGrad)"
+  />
+
+  <!-- Fold triangle (top-right of vertical part) -->
+  <polygon points="304,52 340,88 304,88" fill="url(#foldGrad)"/>
+
+  <!-- Subtle separator at the L elbow -->
+  <line x1="340" y1="368" x2="470" y2="368" stroke="white" stroke-width="2" opacity="0.15"/>
+
+  <!-- List lines on vertical part (white, rx-capped rects for clean ends) -->
+  <rect x="188" y="148" width="128" height="11" rx="5.5" fill="white" opacity="0.28"/>
+  <rect x="188" y="192" width="128" height="11" rx="5.5" fill="white" opacity="0.28"/>
+  <rect x="188" y="236" width="128" height="11" rx="5.5" fill="white" opacity="0.28"/>
+  <rect x="188" y="280" width="96"  height="11" rx="5.5" fill="white" opacity="0.28"/>
+
+  <!-- List lines on horizontal foot -->
+  <rect x="360" y="392" width="90" height="10" rx="5" fill="white" opacity="0.22"/>
+  <rect x="360" y="422" width="70" height="10" rx="5" fill="white" opacity="0.22"/>
+
+
+  <!-- ═══════════════════════════════════
+       LAYER 2 — "C" letter block (front-left)
+       Deep P&G blue rounded square, overlapping the note's left edge
+       Microsoft Fluent style: letter = app identity anchor
+       Block: x=30 y=178 w=192 h=192  → center (126, 274)
+       ═══════════════════════════════════ -->
+  <rect x="30" y="178" width="192" height="192" rx="30" ry="30" fill="url(#blockGrad)"/>
+
+  <!--
+    Letter C — single bold stroked arc, Microsoft style
+    Center (126, 274), radius 56, opening ±48° from right
+    Top:    (126 + 56·cos(-48°), 274 + 56·sin(-48°)) ≈ (164, 232)
+    Bottom: (164, 316)
+    Large-arc CCW = flag 1,0
+  -->
+  <path
+    d="M 164,232 A 56,56 0 1,0 164,316"
+    fill="none"
+    stroke="white"
+    stroke-width="28"
+    stroke-linecap="butt"
+  />
+</svg>
+
