@@ -65,6 +65,13 @@ export function TopTabBar({ tabs, activeTab, onTabChange }: TopTabBarProps) {
         })}
       </div>
 
+      {/* DEV 标识 */}
+      {import.meta.env.DEV && (
+        <span className="ml-2 px-1.5 py-0.5 text-[10px] font-bold leading-none rounded bg-yellow-400 text-black select-none">
+          DEV
+        </span>
+      )}
+
       {/* 中间可拖拽空白区 */}
       <div className="flex-1 h-full" data-tauri-drag-region />
 

@@ -104,14 +104,14 @@ export const FollowUpItem = React.memo(function FollowUpItem({
 
     if (e.ctrlKey) {
       // Ctrl+S: 打开状态选择器
-      if (e.key === "s") {
+      if (e.key.toLowerCase() === "s") {
         e.preventDefault();
         e.stopPropagation();
         statusBadgeRef.current?.openPicker();
         return;
       }
       // Ctrl+B: 切换强调
-      if (e.key === "b") {
+      if (e.key.toLowerCase() === "b") {
         e.preventDefault();
         e.stopPropagation();
         updateItem({ id: item.id, isEmphasized: !item.isEmphasized });
@@ -381,7 +381,7 @@ export const FollowUpItem = React.memo(function FollowUpItem({
             multiline
             placeholder="备注…"
             className={[
-              "flex-1 min-w-0 text-body overflow-hidden whitespace-pre-wrap",
+              "flex-1 min-w-0 text-body overflow-hidden truncate",
               item.notes ? "text-content-secondary" : "text-content-secondary opacity-30",
             ].join(" ")}
           />

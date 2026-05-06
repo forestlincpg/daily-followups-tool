@@ -248,13 +248,13 @@ export const SubtaskItem = React.memo(function SubtaskItem({ item, onRequestInpu
           return;
         }
         // Ctrl+B: 切换强调（阶止冒泡到父任务）
-        if (e.ctrlKey && e.key === "b") {
+        if (e.ctrlKey && e.key.toLowerCase() === "b") {
           e.preventDefault();
           e.stopPropagation();
           updateItem({ id: item.id, isEmphasized: !item.isEmphasized });
           return;
         }        // Ctrl+S: 打开状态选择器
-        if (e.ctrlKey && e.key === "s") {
+        if (e.ctrlKey && e.key.toLowerCase() === "s") {
           e.preventDefault();
           e.stopPropagation();
           statusBadgeRef.current?.openPicker();
@@ -377,12 +377,26 @@ export const SubtaskItem = React.memo(function SubtaskItem({ item, onRequestInpu
         ariaLabel="编辑子任务标题"
         focusTrigger={titleFocusTrigger}
         className={[
-          "flex-1 text-body text-content-primary",
+          "flex-1 min-w-0 truncate text-body text-content-primary",
           item.isEmphasized ? "font-semibold" : "font-normal",
           item.status === "done" ? "text-content-secondary" : "",
         ]
           .filter(Boolean)
           .join(" ")}
+      />
+
+      {/* 备注（行内，支持换行） */}
+      <InlineEditor
+        value={item.notes ?? ""}
+        onSave={(val) => updateItem({ id: item.id, notes: val.trim() })}
+        ariaLabel="备注"
+        allowClear
+        multiline
+        placeholder="备注…"
+        className={[
+          "flex-1 min-w-0 text-body overflow-hidden truncate",
+          item.notes ? "text-content-secondary" : "text-content-secondary opacity-30",
+        ].join(" ")}
       />
 
       {/* 等待谁（直接行内填写，填入后自动切为 waiting） */}
@@ -407,7 +421,7 @@ export const SubtaskItem = React.memo(function SubtaskItem({ item, onRequestInpu
         allowClear
 
         className={[
-          "ml-auto text-body w-[80px] truncate text-left",
+          "shrink-0 text-body w-[80px] truncate text-left",
           item.waitingFor ? "font-bold text-content-primary" : "text-content-secondary opacity-30",
         ].join(" ")}
       />

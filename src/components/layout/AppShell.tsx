@@ -72,7 +72,7 @@ export function AppShell() {
         switchTab(NAV_TAB_IDS[next]);
       }
       // Ctrl+S：仅 preventDefault 阻止浏览器保存，不 stopPropagation，让 React 组件处理
-      if (e.ctrlKey && e.key === "s") {
+      if (e.ctrlKey && e.key.toLowerCase() === "s") {
         e.preventDefault();
       }
     }
@@ -85,7 +85,7 @@ export function AppShell() {
     function handler(e: KeyboardEvent) {
       if (!e.ctrlKey) return;
 
-      if (e.key === "z") {
+      if (e.key.toLowerCase() === "z") {
         const tag = (document.activeElement as HTMLElement)?.tagName ?? "";
         if (tag === "INPUT" || tag === "TEXTAREA") return;
         e.preventDefault();
@@ -93,7 +93,7 @@ export function AppShell() {
         return;
       }
 
-      if (e.key !== "c") return;
+      if (e.key.toLowerCase() !== "c") return;
       const tag = (document.activeElement as HTMLElement)?.tagName ?? "";
       const isEditable =
         tag === "INPUT" || tag === "TEXTAREA" || (document.activeElement as HTMLElement)?.isContentEditable;
