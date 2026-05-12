@@ -381,7 +381,7 @@ export const FollowUpItem = React.memo(function FollowUpItem({
             multiline
             placeholder="备注…"
             className={[
-              "flex-1 min-w-0 text-body overflow-hidden truncate",
+              "flex-1 min-w-0 text-body overflow-hidden whitespace-pre-wrap break-words",
               item.notes ? "text-content-secondary" : "text-content-secondary opacity-30",
             ].join(" ")}
           />

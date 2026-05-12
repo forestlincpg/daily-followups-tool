@@ -32,10 +32,10 @@ const STATUS_MAP: Record<string, {
   badgeColor: "brand" | "warning" | "success" | "important";
   dotColor: string;
 }> = {
-  todo:      { label: "待办",     badgeColor: "brand",     dotColor: tokens.colorBrandForeground1 },
-  waiting:   { label: "等待他人", badgeColor: "warning",   dotColor: tokens.colorPaletteYellowForeground1 },
-  done:      { label: "已完成",   badgeColor: "success",   dotColor: tokens.colorPaletteGreenForeground1 },
-  long_term: { label: "长期跟进", badgeColor: "important", dotColor: tokens.colorPaletteRedForeground1 },
+  todo:      { label: "待办",     badgeColor: "brand",     dotColor: tokens.colorBrandBackground },
+  waiting:   { label: "等待他人", badgeColor: "warning",   dotColor: tokens.colorPaletteYellowBackground2 },
+  done:      { label: "已完成",   badgeColor: "success",   dotColor: tokens.colorPaletteGreenBackground3 },
+  long_term: { label: "长期跟进", badgeColor: "important", dotColor: tokens.colorNeutralForeground1 },
 };
 
 function statusLabel(s: string) {
@@ -124,8 +124,8 @@ export function StatusHistoryPopover({
 
   // 定位：确保不超出视口
   const computePosition = useCallback(() => {
-    const w = 320;
-    const maxH = 400;
+    const w = 520;
+    const maxH = 480;
     let x = anchorX;
     let y = anchorY;
     if (x + w > window.innerWidth - 12) x = window.innerWidth - w - 12;
@@ -145,10 +145,10 @@ export function StatusHistoryPopover({
         position: "fixed",
         left: pos.x,
         top: pos.y,
-        width: 320,
-        maxHeight: 400,
+        width: 520,
+        maxHeight: 480,
         zIndex: 1000000,
-        background: "#ffffff",
+        background: tokens.colorNeutralBackground1,
         border: `1px solid ${tokens.colorNeutralStroke1}`,
         borderRadius: tokens.borderRadiusXLarge,
         boxShadow: tokens.shadow16,
@@ -168,7 +168,7 @@ export function StatusHistoryPopover({
           display: "flex",
           alignItems: "center",
           gap: 8,
-          padding: "12px 16px 10px",
+          padding: "14px 20px 12px",
           borderBottom: `1px solid ${tokens.colorNeutralStroke2}`,
         }}
       >
@@ -179,7 +179,7 @@ export function StatusHistoryPopover({
         <Subtitle2
           style={{
             flex: 1,
-            fontSize: 15,
+            fontSize: 14,
             fontWeight: 600,
             lineHeight: tokens.lineHeightBase300,
             color: tokens.colorNeutralForeground1,
@@ -190,13 +190,13 @@ export function StatusHistoryPopover({
         >
           {itemTitle}
         </Subtitle2>
-        <Caption1 style={{ color: tokens.colorNeutralForeground3, flexShrink: 0, fontSize: 13 }}>
+        <Caption1 style={{ color: tokens.colorNeutralForeground3, flexShrink: 0, fontSize: 12 }}>
           状态历史
         </Caption1>
       </div>
 
       {/* ── 时间线内容区 ── */}
-      <div style={{ flex: 1, overflow: "auto", padding: "10px 16px 14px" }}>
+      <div style={{ flex: 1, overflow: "auto", padding: "12px 20px 16px" }}>
         {history === null ? (
           <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
             <Spinner size="tiny" label="加载中..." />
@@ -250,13 +250,13 @@ export function StatusHistoryPopover({
                   }}
                 />
 
-                {/* 时间戳 */}
+                {/* 时间戳 — 与主界面日期 Badge 统一字体风格 */}
                 <Caption1
                   style={{
                     display: "block",
                     color: tokens.colorNeutralForeground3,
-                    fontSize: 13,
-                    fontFamily: tokens.fontFamilyMonospace,
+                    fontSize: 12,
+                    fontFamily: tokens.fontFamilyBase,
                     lineHeight: 1.3,
                     marginBottom: 6,
                   }}
@@ -264,11 +264,11 @@ export function StatusHistoryPopover({
                   {formatTime(entry.changedAt)}
                 </Caption1>
 
-                {/* 状态变更行 */}
+                {/* 状态变更行 — 统一使用 filled appearance */}
                 <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14 }}>
                   {entry.oldStatus ? (
                     <Badge
-                      appearance="outline"
+                      appearance="filled"
                       color={badgeColor(entry.oldStatus)}
                       size="medium"
                       shape="rounded"
@@ -282,7 +282,7 @@ export function StatusHistoryPopover({
                         alignItems: "center",
                         gap: 2,
                         color: tokens.colorNeutralForeground3,
-                        fontSize: 14,
+                        fontSize: 12,
                       }}
                     >
                       <AddRegular fontSize={12} />
